@@ -1,19 +1,17 @@
 {
   "name": "imba-auto-state-example",
+  "dependencies": {
+    "express": "^4.17.1",
+    "imba": "^2.0.0-alpha.146",
+    "imba-auto-state": "latest"
+  },
+  "devDependencies": {
+    "serve": "^12.0.0"
+  },
   "scripts": {
     "dev": "imba -w app/index.html",
     "build:imba": "imba build ./app/index.html -v -m -f -c -S -H --pubdir compiled --clean --mode prod",
     "build": "npm run build:imba && mv ./dist/compiled ./tmp && rm -rf dist && mv ./tmp ./dist",
     "preview": "serve dist/"
-  },
-  "dependencies": {
-    "express": "^4.17.1",
-    "imba": "^2.0.0-alpha.146",
-    "imba-auto-state": "file:.."
-  },
-  "repository": "ProfHercules/imba-auto-state-example",
-  "description": "",
-  "homepage": "https://github.com/ProfHercules/imba-auto-state-example",
-  "author": "Author Name (https://github.com/ProfHercules)",
-  "license": "ISC"
+  }
 }
