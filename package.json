@@ -1,0 +1,25 @@
+{
+  "name": "imba-auto-state",
+  "version": "0.0.1",
+  "description": "Proxy based state management for Imba",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProfHercules/imba-auto-state.git"
+  },
+  "keywords": [
+    "state management"
+  ],
+  "author": "Hercules Smith",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ProfHercules/imba-auto-state/issues"
+  },
+  "homepage": "https://github.com/ProfHercules/imba-auto-state#readme",
+  "dependencies": {
+    "imba": "^2.0.0-alpha.165"
+  }
+}
