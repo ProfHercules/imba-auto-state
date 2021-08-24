@@ -22,11 +22,11 @@ extend tag element
 
 tag App
     def render
-		<self>
-			<p> "Count: {#state.count}"
-			<div>
-				<button @click=(#state.count++)> "+"
-				<button @click=(#state.count--)> "-"
+        <self>
+            <p> "Count: {#state.count}"
+                <div>
+                    <button @click=(#state.count++)> "+"
+                    <button @click=(#state.count--)> "-"
 
 imba.mount(<App>)
 ```
@@ -66,36 +66,36 @@ import { auth, firestore } from "./lib/firebase"
 import { Record } from "./lib/types"
 
 tag FirebaseApp
-	def listenToFirestore(path\string)
-		const collRef = collection(firestore, path)
-		onSnapshot(collRef, do(qs)
-			#state.records = qs.docs.map(do(doc)
-				new Record(doc.data(), doc.id)
-			)
-		)
+    def listenToFirestore(path\string)
+        const collRef = collection(firestore, path)
+        onSnapshot(collRef, do(qs)
+            #state.records = qs.docs.map(do(doc)
+                new Record(doc.data(), doc.id)
+            )
+        )
 
-	def mount()
-		auth.onAuthStateChanged(do(u)
-			#state.user = u
+    def mount()
+        auth.onAuthStateChanged(do(u)
+            #state.user = u
 
-			if (u)
-				listenToFirestore("users/{u.uid}/records")
-				if router.path === '/'
-					router.go('/summary')
-			else
-				router.go('/')
-		)
+            if (u)
+                listenToFirestore("users/{u.uid}/records")
+                if router.path === '/'
+                    router.go('/summary')
+                else
+                    router.go('/')
+        )
 
 export tag App < FirebaseApp
-	def render
-		<self>
-			if (#state.user === undefined)
-				<main>
-					<h1 [c:gray7]> "Loading..."
-			elif (#state.user === null)
-				<Home route='/'>
-			else
-				<Navbar>
-					<Summary route='/summary'>
-					<Records route='/records'>
+    def render
+        <self>
+            if (#state.user === undefined)
+                <main>
+                    <h1 [c:gray7]> "Loading..."
+            elif (#state.user === null)
+                <Home route='/'>
+            else
+                <Navbar>
+                    <Summary route='/summary'>
+                    <Records route='/records'>
 ```
