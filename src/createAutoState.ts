@@ -1,18 +1,34 @@
-import type { ProxySetFn } from "./types";
+import type { OnChangeFn, ProxyKey } from "./types";
+
+const handleWith = <T extends object>(
+  onChange: OnChangeFn<T>
+): ProxyHandler<T> => {
+  return {
+    set: (target: T, key: ProxyKey, value: any) => {
+      try {
+        Reflect.set(target, key, value);
+        onChange(target, key, value);
+      } catch {
+        return false;
+      }
+      return true;
+    },
+    get: (target: T, key: ProxyKey) => {
+      if (key == "isProxy") return true;
+
+      const prop = target[key];
+
+      if (typeof prop == "undefined") return;
+
+      if (!prop.isProxy && typeof prop === "object")
+        target[key] = new Proxy(prop, handleWith<T>(onChange));
+
+      return target[key];
+    },
+  };
+};
 
 export const createAutoState = <T extends object>(
   state: T,
-  updatePending?: ProxySetFn,
-  updateComplete?: ProxySetFn
-): T =>
-  new Proxy<T>(state, {
-    set: (target: object, key: string | symbol, value: any) => {
-      if (!imba || !imba.commit) throw Error("Imba is undefined");
-      updatePending && updatePending(target, key, value);
-      Reflect.set(target, key, value);
-      imba
-        .commit()
-        .then((_) => updateComplete && updateComplete(target, key, value));
-      return true;
-    },
-  });
+  onChange: OnChangeFn<T>
+): T => new Proxy<T>(state, handleWith<T>(onChange));

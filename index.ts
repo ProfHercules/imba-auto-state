@@ -1,4 +1,4 @@
 import { createAutoState } from "./src/createAutoState";
-import type { ProxySetFn } from "./src/types";
+import type { ProxyKey, OnChangeFn } from "./src/types";
 
-export { createAutoState, ProxySetFn };
+export { createAutoState, ProxyKey, OnChangeFn };
