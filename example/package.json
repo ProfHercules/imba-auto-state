@@ -2,7 +2,7 @@
   "name": "imba-auto-state-example",
   "dependencies": {
     "express": "^4.17.1",
-    "imba": "^2.0.0-alpha.146",
+    "imba": "^2.0.0-alpha.165",
     "imba-auto-state": "latest"
   },
   "devDependencies": {
