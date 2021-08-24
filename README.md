@@ -24,15 +24,15 @@ import { StatefulTag } from "imba-auto-state"
 import { StatefulTag } from "imba-auto-state"
 
 tag App < StatefulTag
-    state = { count: 0 }
+  state = { count: 0 }
 
-    def render
-        <self>
-            <div>
-				<p> "Count: {state.count}"
-			<div>
-				<button @click=(state.count++)> "+"
-				<button @click=(state.count--)> "-"
+  def render
+    <self>
+      <div>
+        <p> "Count: {state.count}"
+        <div>
+          <button @click=(state.count++)> "+"
+          <button @click=(state.count--)> "-"
 ```
 
 Changing any nested property of the state object, anywhere else in your codebase will ensure this component renders itself again.
@@ -53,8 +53,8 @@ Changing any nested property of the state object, anywhere else in your codebase
 
    # now we can simply extend the global base element
    extend tag element
-        get #state
-            appState
+     get #state
+       appState
    ```
 
 2. Now just import `state.imba` somewhere, anywhere, in your project.
