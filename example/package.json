@@ -10,6 +10,7 @@
   },
   "scripts": {
     "dev": "imba -w app/index.html",
+    "build:dev": "imba build ./app/index.html --mode development",
     "build:imba": "imba build ./app/index.html -v -m -f -c -S -H --pubdir compiled --clean --mode prod",
     "build": "npm run build:imba && mv ./dist/compiled ./tmp && rm -rf dist && mv ./tmp ./dist",
     "preview": "serve dist/"
