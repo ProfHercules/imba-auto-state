@@ -20,6 +20,11 @@ const handleWith = <T extends object>(
 
       if (typeof prop == "undefined") return;
 
+      const propDesc = Object.getOwnPropertyDescriptor(target, key);
+
+      // we're dealing with something we can't wrap in a Proxy; skip it
+      if (propDesc.set === undefined) return target[key];
+
       if (!prop.isProxy && typeof prop === "object")
         target[key] = new Proxy(prop, handleWith<T>(onChange));
 
