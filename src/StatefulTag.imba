@@ -11,7 +11,7 @@ export tag StatefulTag
 	def registerState(state\object)
 		createAutoState(state, do(target, key, value)
 			console.log("{target.constructor.name}[{key.toString!}] changedTo -> {value}")
-			self.render!
+			self.schedule!
 		)
 
 	def render
